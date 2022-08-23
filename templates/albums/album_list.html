@@ -2,6 +2,9 @@
 
 {% block content %}
 {% for album in albums %}
-{{ album }}
+<article>
+    <div><a href="{% url 'Album details' pk=album.pk %}">{{ album.title }}</a></div>
+    <div>by <a href="{% url 'Artist details' pk=album.artist.pk %}">{{ album.artist.name }}</a></div>
+</article>
 {% endfor %}
 {% endblock %}
