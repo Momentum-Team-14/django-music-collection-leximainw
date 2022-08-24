@@ -99,9 +99,11 @@ def artist_list(request):
 
 def artist_details(request, pk=None):
     artist = get_object_or_404(Artist, pk=pk)
+    albums = Album.objects.filter(artist=artist)
     return render(request, 'albums/artist_details.html', {
         'page_name': 'Artist Details',
         'artist': artist,
+        'albums': albums,
     })
 
 
