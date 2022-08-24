@@ -5,11 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{{ site_name }}</title>
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    <div id="content">
+        <header>
+            <div class="spacer">
+                <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name }}{% endif %}</h1>
+            </div>
+        </header>
+        <main>
+            <div class="spacer">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
 </body>
 </html>
