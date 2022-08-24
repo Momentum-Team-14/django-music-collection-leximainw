@@ -47,9 +47,9 @@ def album_edit(request, pk=None):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         if form.is_valid():
-            album.title = form.title
-            album.artist = form.artist
-            album.release_date = form.release_date
+            album.title = form.cleaned_data['title']
+            album.artist = form.cleaned_data['artist']
+            album.release_date = form.cleaned_data['release_date']
             album.save()
             return redirect('Album details', pk=album.pk)
         else:
@@ -113,7 +113,7 @@ def artist_edit(request, pk=None):
     if request.method == 'POST':
         form = ArtistForm(request.POST)
         if form.is_valid():
-            artist.name = form.name
+            artist.name = form.cleaned_data['name']
             artist.save()
             return redirect('Artist details', pk=artist.pk)
         else:

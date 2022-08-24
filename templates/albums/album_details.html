@@ -4,4 +4,5 @@
 <div><a href="{% url 'Edit album' pk=album.pk %}">Edit</a> or <a href="{% url 'Delete album' pk=album.pk %}">Delete</a></div>
 <div>{{ album.title }}</div>
 <div><a href="{% url 'Artist details' pk=album.artist.pk %}">{{ album.artist.name }}</a></div>
+<div>Released on {{ album.release_date|date:"F jS, Y" }}</div>
 {% endblock %}
