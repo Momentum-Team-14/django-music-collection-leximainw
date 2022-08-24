@@ -34,10 +34,7 @@ def album_new(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         if form.is_valid():
-            album = form.save(commit=False)
-            album.created_at = timezone.now()
-            album.save()
-            return redirect('Album details', pk=album.pk)
+            return redirect('Album details', pk=form.save().pk)
         else:
             return redirect('/')
     else:
@@ -111,10 +108,7 @@ def artist_new(request, pk=None):
     if request.method == 'POST':
         form = ArtistForm(request.POST)
         if form.is_valid():
-            artist = form.save(commit=False)
-            artist.created_at = timezone.now()
-            artist.save()
-            return redirect('Artist details', pk=artist.pk)
+            return redirect('Artist details', pk=form.save().pk)
         else:
             return redirect('/')
     else:
