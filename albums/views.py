@@ -1,3 +1,5 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
 from django.shortcuts import (
@@ -16,6 +18,19 @@ from .models import (
     Artist,
     Profile,
 )
+
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            login(request, form.save())
+        return redirect('/')
+    else:
+        form = UserCreationForm()
+        return render(request, 'registration/register.html', {'form': form})
 
 
 def album_list(request):

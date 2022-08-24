@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.album_list),
+    path('accounts/register/', views.register, name='Register'),
     path('albums/', views.album_list, name='Album list'),
     path('albums/new/', views.album_new, name='New album'),
     path('albums/<int:pk>/', views.album_details, name='Album details'),
