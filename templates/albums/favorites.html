@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Favorite Albums:</h2>
+    {% for favorite in favorites %}
+        <article><a href="{% url 'Album details' pk=favorite.pk %}">{{ favorite.title }}</a></article>
+    {% endfor %}
+{% endblock %}

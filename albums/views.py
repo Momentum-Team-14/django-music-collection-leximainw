@@ -33,6 +33,14 @@ def register(request):
         return render(request, 'registration/register.html', {'form': form})
 
 
+def favorites(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    favorites = profile.favorites.all()
+    return render(request, 'albums/favorites.html', {'favorites': favorites})
+
+
 def album_list(request):
     albums = Album.objects.all()
     if request.user.is_authenticated:
