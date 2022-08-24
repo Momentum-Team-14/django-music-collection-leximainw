@@ -16,12 +16,18 @@ from .models import (
 
 def album_list(request):
     albums = Album.objects.all()
-    return render(request, 'albums/album_list.html', {'albums': albums})
+    return render(request, 'albums/album_list.html', {
+        'page_name': 'Album List',
+        'albums': albums,
+    })
 
 
 def album_details(request, pk=None):
     album = get_object_or_404(Album, pk=pk)
-    return render(request, 'albums/album_details.html', {'album': album})
+    return render(request, 'albums/album_details.html', {
+        'page_name': 'Album Details',
+        'album': album,
+    })
 
 
 def album_new(request):
@@ -37,6 +43,7 @@ def album_new(request):
     else:
         form = AlbumForm()
         return render(request, 'albums/edit_form.html', {
+            'page_name': 'Create Album',
             'form': form,
             'button_text': 'Create',
         })
@@ -61,8 +68,9 @@ def album_edit(request, pk=None):
             'release_date': album.release_date,
         })
         return render(request, 'albums/edit_form.html', {
+            'page_name': 'Edit Album',
             'form': form,
-            'button_text': 'Save'
+            'button_text': 'Save',
         })
 
 
@@ -76,18 +84,25 @@ def album_delete(request, pk=None):
             return redirect('Album details', pk=album.pk)
     else:
         return render(request, 'albums/delete_form.html', {
-            'confirm_text': album.title
+            'page_name': 'Delete Album',
+            'confirm_text': album.title,
         })
 
 
 def artist_list(request):
     artists = Artist.objects.all()
-    return render(request, 'albums/artist_list.html', {'artists': artists})
+    return render(request, 'albums/artist_list.html', {
+        'page_name': 'Artist List',
+        'artists': artists,
+    })
 
 
 def artist_details(request, pk=None):
     artist = get_object_or_404(Artist, pk=pk)
-    return render(request, 'albums/artist_details.html', {'artist': artist})
+    return render(request, 'albums/artist_details.html', {
+        'page_name': 'Artist Details',
+        'artist': artist,
+    })
 
 
 def artist_new(request, pk=None):
@@ -103,6 +118,7 @@ def artist_new(request, pk=None):
     else:
         form = ArtistForm()
         return render(request, 'albums/edit_form.html', {
+            'page_name': 'Create Artist',
             'form': form,
             'button_text': 'Create',
         })
@@ -123,6 +139,7 @@ def artist_edit(request, pk=None):
             'name': artist.name
         })
         return render(request, 'albums/edit_form.html', {
+            'page_name': 'Edit Artist',
             'form': form,
             'button_text': 'Save',
         })
@@ -138,5 +155,6 @@ def artist_delete(request, pk=None):
             return redirect('Artist details', pk=artist.pk)
     else:
         return render(request, 'albums/delete_form.html', {
+            'page_name': 'Delete Artist',
             'confirm_text': artist.name
         })
