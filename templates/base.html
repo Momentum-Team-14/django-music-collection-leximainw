@@ -14,7 +14,7 @@
         <header>
             <div class="spacer">
                 <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name }}{% endif %}</h1>
-                {% if back_url %}<div><a href="{{ back_url }}"><-- Go Back</a></div>{% endif %}
+                {% if back_url %}<div><a href="{{ back_url }}">{% if back_text %}{{ back_text }}{% else %}<-- Go Back{% endif %}</a></div>{% endif %}
             </div>
         </header>
         <main>

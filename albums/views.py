@@ -29,6 +29,7 @@ def album_details(request, pk=None):
         'page_name': 'Album Details',
         'album': album,
         'back_url': resolve_url('Album list'),
+        'back_text': f'Back to album list',
     })
 
 
@@ -46,6 +47,7 @@ def album_new(request):
             'form': form,
             'button_text': 'Create',
             'back_url': resolve_url('Album list'),
+            'back_text': f'Back to album list',
         })
 
 
@@ -72,6 +74,7 @@ def album_edit(request, pk=None):
             'form': form,
             'button_text': 'Save',
             'back_url': resolve_url('Album details', pk=album.pk),
+            'back_text': f'Back to {album.title}',
         })
 
 
@@ -88,6 +91,7 @@ def album_delete(request, pk=None):
             'page_name': 'Delete Album',
             'confirm_text': album.title,
             'back_url': resolve_url('Album details', pk=album.pk),
+            'back_text': f'Back to {album.title}',
         })
 
 
@@ -107,6 +111,7 @@ def artist_details(request, pk=None):
         'artist': artist,
         'albums': albums,
         'back_url': resolve_url('Artist list'),
+            'back_text': 'Back to artist list',
     })
 
 
@@ -124,6 +129,7 @@ def artist_new(request, pk=None):
             'form': form,
             'button_text': 'Create',
             'back_url': resolve_url('Artist list'),
+            'back_text': 'Back to artist list',
         })
 
 
@@ -146,6 +152,7 @@ def artist_edit(request, pk=None):
             'form': form,
             'button_text': 'Save',
             'back_url': resolve_url('Artist details', pk=artist.pk),
+            'back_text': f'Back to {artist.name}',
         })
 
 
@@ -162,4 +169,5 @@ def artist_delete(request, pk=None):
             'page_name': 'Delete Artist',
             'confirm_text': artist.name,
             'back_url': resolve_url('Artist details', pk=artist.pk),
+            'back_text': f'Back to {artist.name}',
         })
