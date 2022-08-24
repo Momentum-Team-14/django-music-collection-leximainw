@@ -92,7 +92,7 @@ def artist_details(request, pk=None):
 
 def artist_new(request, pk=None):
     if request.method == 'POST':
-        form = AlbumForm(request.POST)
+        form = ArtistForm(request.POST)
         if form.is_valid():
             artist = form.save(commit=False)
             artist.created_at = timezone.now()
@@ -111,7 +111,7 @@ def artist_new(request, pk=None):
 def artist_edit(request, pk=None):
     artist = get_object_or_404(Artist, pk=pk)
     if request.method == 'POST':
-        form = AlbumForm(request.POST)
+        form = ArtistForm(request.POST)
         if form.is_valid():
             artist.name = form.name
             artist.save()

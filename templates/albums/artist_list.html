@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div><a href="{% url 'New artist' %}">Create artist</a></div>
 {% for artist in artists %}
 <article>
     <div><a href="{% url 'Artist details' pk=artist.pk %}">{{ artist.name }}</a></div>
