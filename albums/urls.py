@@ -10,5 +10,8 @@ urlpatterns = [
     path('albums/<int:pk>/edit/', views.album_edit, name='Edit album'),
     path('albums/<int:pk>/delete/', views.album_delete, name='Delete album'),
     path('artists/', views.artist_list, name='Artist list'),
+    path('artists/new/', views.artist_new, name='New artist'),
     path('artists/<int:pk>/', views.artist_details, name='Artist details'),
+    path('artists/<int:pk>/edit/', views.artist_edit, name='Edit artist'),
+    path('artists/<int:pk>/delete/', views.artist_delete, name='Delete artist'),
 ]
