@@ -144,3 +144,13 @@ main h1
 {
     display: grid;
 }
+
+.favorite
+{
+    text-decoration: none;
+}
+
+.hidden
+{
+    display: none;
+}

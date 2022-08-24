@@ -1,3 +1,5 @@
+from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
 from django.shortcuts import (
     get_object_or_404,
     redirect,
@@ -12,14 +14,21 @@ from .forms import (
 from .models import (
     Album,
     Artist,
+    Profile,
 )
 
 
 def album_list(request):
     albums = Album.objects.all()
+    if request.user.is_authenticated:
+        profile, _ = Profile.objects.get_or_create(user=request.user)
+        favorites = profile.favorites.values_list('id', flat=True)
+    else:
+        favorites = []
     return render(request, 'albums/album_list.html', {
         'page_name': 'Album List',
         'albums': albums,
+        'favorites': favorites,
     })
 
 
@@ -93,6 +102,20 @@ def album_delete(request, pk=None):
             'back_url': resolve_url('Album details', pk=album.pk),
             'back_text': f'Back to {album.title}',
         })
+
+
+def album_favorite(request, pk=None):
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
+    album = get_object_or_404(Album, pk=pk)
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    if profile.favorites.filter(pk=pk).exists():
+        profile.favorites.remove(album)
+        data = {'favorited': False}
+    else:
+        profile.favorites.add(album)
+        data = {'favorited': True}
+    return JsonResponse(data)
 
 
 def artist_list(request):

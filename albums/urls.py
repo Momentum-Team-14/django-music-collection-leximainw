@@ -9,6 +9,7 @@ urlpatterns = [
     path('albums/<int:pk>/', views.album_details, name='Album details'),
     path('albums/<int:pk>/edit/', views.album_edit, name='Edit album'),
     path('albums/<int:pk>/delete/', views.album_delete, name='Delete album'),
+    path('albums/<int:pk>/favorite/', views.album_favorite, name='Favorite album'),
     path('artists/', views.artist_list, name='Artist list'),
     path('artists/new/', views.artist_new, name='New artist'),
     path('artists/<int:pk>/', views.artist_details, name='Artist details'),
