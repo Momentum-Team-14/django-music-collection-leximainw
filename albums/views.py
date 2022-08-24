@@ -2,6 +2,7 @@ from django.shortcuts import (
     get_object_or_404,
     redirect,
     render,
+    resolve_url,
 )
 from django.utils import timezone
 from .forms import (
@@ -27,6 +28,7 @@ def album_details(request, pk=None):
     return render(request, 'albums/album_details.html', {
         'page_name': 'Album Details',
         'album': album,
+        'back_url': resolve_url('Album list'),
     })
 
 
@@ -43,6 +45,7 @@ def album_new(request):
             'page_name': 'Create Album',
             'form': form,
             'button_text': 'Create',
+            'back_url': resolve_url('Album list'),
         })
 
 
@@ -68,6 +71,7 @@ def album_edit(request, pk=None):
             'page_name': 'Edit Album',
             'form': form,
             'button_text': 'Save',
+            'back_url': resolve_url('Album details', pk=album.pk),
         })
 
 
@@ -83,6 +87,7 @@ def album_delete(request, pk=None):
         return render(request, 'albums/delete_form.html', {
             'page_name': 'Delete Album',
             'confirm_text': album.title,
+            'back_url': resolve_url('Album details', pk=album.pk),
         })
 
 
@@ -101,6 +106,7 @@ def artist_details(request, pk=None):
         'page_name': 'Artist Details',
         'artist': artist,
         'albums': albums,
+        'back_url': resolve_url('Artist list'),
     })
 
 
@@ -117,6 +123,7 @@ def artist_new(request, pk=None):
             'page_name': 'Create Artist',
             'form': form,
             'button_text': 'Create',
+            'back_url': resolve_url('Artist list'),
         })
 
 
@@ -138,6 +145,7 @@ def artist_edit(request, pk=None):
             'page_name': 'Edit Artist',
             'form': form,
             'button_text': 'Save',
+            'back_url': resolve_url('Artist details', pk=artist.pk),
         })
 
 
@@ -152,5 +160,6 @@ def artist_delete(request, pk=None):
     else:
         return render(request, 'albums/delete_form.html', {
             'page_name': 'Delete Artist',
-            'confirm_text': artist.name
+            'confirm_text': artist.name,
+            'back_url': resolve_url('Artist details', pk=artist.pk),
         })
