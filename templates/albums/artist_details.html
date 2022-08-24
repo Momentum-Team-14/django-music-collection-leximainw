@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div><a href="{% url 'Edit artist' pk=artist.pk %}">Edit</a> or <a href="{% url 'Delete artist' pk=artist.pk %}">Delete</a></div>
-<div>{{ artist.name }}</div>
-<div>
+<p><a href="{% url 'Edit artist' pk=artist.pk %}">Edit</a> or <a href="{% url 'Delete artist' pk=artist.pk %}">Delete</a></p>
+<p>{{ artist.name }}</p>
+<p>
     <div>Albums:</div>
     {% for album in albums %}
         <article>
             <a href="{% url 'Album details' pk=album.pk %}">{{ album.title }}</a>
         </article>
     {% endfor %}
-</div>
+</p>
 {% endblock %}
