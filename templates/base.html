@@ -15,7 +15,7 @@
             <div class="spacer">
                 <div class="flex between">
                     <div>
-                        <h1><a href="/">{% if page_name %}{{ page_name }}{% else %}{{ site_name }}{% endif %}</a></h1>
+                        <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name }}{% endif %}</h1>
                         <div><a href="{% url 'Album list' %}">All Albums</a> &nbsp; <a href="{% url 'Artist list' %}">All Artists</a></div>
                     </div>
                     <div class="text-right">
