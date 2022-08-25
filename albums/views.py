@@ -1,6 +1,8 @@
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
+from django.db.models.functions import Lower
 from django.http import JsonResponse
 from django.shortcuts import (
     get_object_or_404,
@@ -43,6 +45,8 @@ def favorites(request):
 
 def album_list(request):
     albums = Album.objects.all()
+    if settings.SORT_LISTS:
+        albums = albums.order_by(Lower('title'))
     if request.user.is_authenticated:
         profile, _ = Profile.objects.get_or_create(user=request.user)
         favorites = profile.favorites.values_list('id', flat=True)
@@ -143,6 +147,8 @@ def album_favorite(request, pk=None):
 
 def artist_list(request):
     artists = Artist.objects.all()
+    if settings.SORT_LISTS:
+        albums = albums.order_by(Lower('name'))
     return render(request, 'albums/artist_list.html', {
         'page_name': 'Artist List',
         'artists': artists,
