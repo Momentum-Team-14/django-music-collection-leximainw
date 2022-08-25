@@ -38,7 +38,7 @@ def register(request):
 def favorites(request):
     if not request.user.is_authenticated:
         raise PermissionDenied()
-    profile, _ = Profile.objects.get_or_create(user=request.user)
+    profile = Profile.object.get(user=request.user)
     favorites = profile.favorites.all()
     return render(request, 'albums/favorites.html', {'favorites': favorites})
 
@@ -48,7 +48,7 @@ def album_list(request):
     if settings.SORT_LISTS:
         albums = albums.order_by(Lower('title'))
     if request.user.is_authenticated:
-        profile, _ = Profile.objects.get_or_create(user=request.user)
+        profile = Profile.objects.get(user=request.user)
         favorites = profile.favorites.values_list('id', flat=True)
     else:
         favorites = []
@@ -135,7 +135,7 @@ def album_favorite(request, pk=None):
     if not request.user.is_authenticated:
         raise PermissionDenied()
     album = get_object_or_404(Album, pk=pk)
-    profile, _ = Profile.objects.get_or_create(user=request.user)
+    profile = Profile.objects.get(user=request.user)
     if profile.favorites.filter(pk=pk).exists():
         profile.favorites.remove(album)
         data = {'favorited': False}
