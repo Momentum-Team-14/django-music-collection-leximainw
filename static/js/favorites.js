@@ -1,7 +1,6 @@
 for (let star of document.querySelectorAll('.favorite'))
 {
     star.addEventListener('click', e => {
-        console.log(star.href)
         fetch(star.href)
             .then(res => res.json())
             .then(data => {
